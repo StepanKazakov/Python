@@ -1,0 +1,141 @@
+{
+	"id": "9dc1abe7-98e4-4039-89c8-def6d04a2ca4",
+	"name": "Переменные для расписания личных событий",
+	"values": [
+		{
+			"key": "URL",
+			"value": "https://api-teachers.skyeng.ru",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "API",
+			"value": "/v2/schedule/",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEwMzM4NzM2LCJpZGVudGl0eSI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJpZGVudGl0eUxvZ2luIjpudWxsLCJpZGVudGl0eUVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsImlkZW50aXR5UGhvbmUiOiIrMTY1MDU1NTEyMTIiLCJuYW1lIjoidGVzdGVycyIsInN1cm5hbWUiOiJUZXN0MSIsImVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsInVpTGFuZ3VhZ2UiOiJydSIsImxvY2FsZSI6InJ1Iiwic2VydmljZUxvY2FsZSI6bnVsbCwidWFzIjozMCwiand0VHlwZSI6MSwianRpIjoiUlA1QVg1RVVnRUI3RWlqbUU0Y0Vtc3hBVzVOcHhUTW0iLCJicmFuZCI6bnVsbCwiZXhwIjoxNjUzMjc5NTM2LCJhdmF0YXJVcmwiOiJodHRwczpcL1wvYXV0aC1hdmF0YXJzLXNreWVuZy5pbWdpeC5uZXRcLzEwMzM4NzM2XC8xZGQ5MzVhOC1kZjIxLTQ2YzYtYTAzYy0zNWU5MWUxZGVkZWY_YXV0bz1mb3JtYXQlMkNlbmhhbmNlJmZpdD1jcm9wJmg9MjAwJml4bGliPXBocC0yLjEuMSZxPTc1JnNhdD04JnNoYXJwPTEwJnZpYj04Jnc9MjAwIiwiYVR5cGUiOiJVU0VSTkFNRV9QQVNTV09SRCIsImFUaW1lIjoxNjUwODIwMDkyLCJyb2xlcyI6WyJST0xFX1RFQUNIRVIiLCJST0xFX0NSTTJfVEVBQ0hFUl9BQ0NFU1MiLCJST0xFX1RUQ19VU0FHRSIsIlJPTEVfVklNQk9YX1RFQUNIRVJfVVNBR0UiLCJST0xFX1ZJTUJPWF9DUkVBVEVfU0NSRUVOSU5HX1RFU1QiXX0.SqTvr39khZKeoydC6rjkcUicLtZjS3lrQj2Tfj7NUge3cRGmk6mOnReCXS742ff3iqC6MlNPX-h3RvgUxf7D5VPn-l9k41TtZf6EUyLUz-PLefnEySZ3drFfI4DeezrrIHe8eFAxVNd2X9IO4QEVk7mEp1Rxv3rAo5IkgtFW9e9ho-g6vny8R-Kx7uf6NwPRtjCj4psCvQQhzc_bb90DFyvQCtB5LRv_qTDJwzPJGuXdvUFOoer1PsbGR9bIYaBvVJxTY4pEPQ0TejVeJsHIXGMZJKM4ywc-YZXSHuict-9RIp2CQN5OVAfOoVKvYvfZVxE4g3ejEDP5r7ZPwdkKUKUB1pb0vDyvvR3sIgmxLgBr68JS3GqC9K8tqc7CgTAmOfCNRvvLrcy8rG4AxLaHymZ7iAyGR9kWhEdnuf0hi0hD_9D8E-DSfzEBmVplrRBqf_6moEfT2Ka3_DOM-gAovbr6Wt3jLe7P7E7vZ5mh8UN0pmuNgTTh_9ZPddhWNihewEJbPYFJEPiOJxo_ces_vcOLyI_A9CkC4SL73006kDwco6WLxaDUus7w3WvXu-hhdoSkefds1IHZUPdufxC4FrUdK0GXUNjw2c69p6Gbyas1mAlSpjjq29Tf64rDdLMTYZXWCHvidNFvhPY7yBl-ALGzJ5hx-uxW-OnvNY1l-N0",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "grey",
+			"value": "#81888D",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "grey_b",
+			"value": "#F4F5F6",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "yellow",
+			"value": "#FAC641",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "yellow_b",
+			"value": "#FFF7C7",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "green",
+			"value": "#43B658",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "green_b",
+			"value": "#EBFDF2",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "plum",
+			"value": "#D478F1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "plum_b",
+			"value": "#F9EBFF",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "blue",
+			"value": "#5d9cec",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "blue_b",
+			"value": "#f2f7fd",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "black",
+			"value": "#242d34",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "current_date",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "current_time",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "event_1",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "event_2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_4",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_5",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "event_6",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-05-22T05:11:30.763Z",
+	"_postman_exported_using": "Postman/9.19.3"
+}
