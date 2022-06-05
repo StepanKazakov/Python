@@ -1,2736 +1,2574 @@
 {
-	"info": {
-		"_postman_id": "b5f1cc5e-57af-44a8-a60a-c7fcae566d1d",
-		"name": "Расписание: личные события",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19266110"
-	},
-	"item": [
-		{
-			"name": "Просмотр расписания",
-			"item": [
-				{
-					"name": "Позитивные",
-					"item": [
-						{
-							"name": "Личные события за текущий день",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"{{current_date}}T00:00:00+00:00\",\r\n    \"till\":\"{{current_date}}T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Личные события в следующем месяце",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"2022-06-15T00:00:00+00:00\",\r\n    \"till\":\"2022-06-15T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Личные события в прошлом месяце",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"2022-04-15T00:00:00+00:00\",\r\n    \"till\":\"2022-04-15T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Негативные",
-					"item": [
-						{
-							"name": "Запрос расписания с начальной датой позже конечной",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"2022-05-20T00:00:00+00:00\",\r\n    \"till\":\"2022-05-15T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Запрос с просроченным токеном",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 401\", function () {\r",
-											"    pm.response.to.have.status(401);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.message).to.eql(\"Authentication required\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEwMzM4NzM2LCJpZGVudGl0eSI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJpZGVudGl0eUxvZ2luIjpudWxsLCJpZGVudGl0eUVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsImlkZW50aXR5UGhvbmUiOm51bGwsIm5hbWUiOiJNb2JpbGUiLCJzdXJuYW1lIjoiVGVzdDEiLCJlbWFpbCI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJ1aUxhbmd1YWdlIjoicnUiLCJsb2NhbGUiOiJydSIsInNlcnZpY2VMb2NhbGUiOm51bGwsInVhcyI6MzAsImp3dFR5cGUiOjEsImp0aSI6IlF1bmVhUm5Yd0h1bDhWM0h2MkVzQlZxMFlWTmFyQUNoIiwiYnJhbmQiOm51bGwsImV4cCI6MTY0ODczODAyMCwiYXZhdGFyVXJsIjoiaHR0cHM6XC9cL2F1dGgtYXZhdGFycy1za3llbmcuaW1naXgubmV0XC8xMDMzODczNlwvMWRkOTM1YTgtZGYyMS00NmM2LWEwM2MtMzVlOTFlMWRlZGVmP2F1dG89Zm9ybWF0JTJDZW5oYW5jZSZmaXQ9Y3JvcCZoPTIwMCZpeGxpYj1waHAtMi4xLjEmcT03NSZzYXQ9OCZzaGFycD0xMCZ2aWI9OCZ3PTIwMCIsImFUeXBlIjoiVVNFUk5BTUVfUEFTU1dPUkQiLCJhVGltZSI6MTY0NTEwMzEzMywicm9sZXMiOlsiUk9MRV9URUFDSEVSIiwiUk9MRV9DUk0yX1RFQUNIRVJfQUNDRVNTIiwiUk9MRV9UVENfVVNBR0UiLCJST0xFX1ZJTUJPWF9URUFDSEVSX1VTQUdFIiwiUk9MRV9WSU1CT1hfQ1JFQVRFX1NDUkVFTklOR19URVNUIl19.WffFzgxjG7hwSV1zWB7T5h8RMtgTsUmFXYRTQRFTPxfeW-aSxX3SpAdLgavSz_xB66_gd-S3_NjIfPf8l66oHDWfNX8bPIoEg8pk7g3YEM2uPH4cC57HdTMXpYSbGbjuTHoR7bLLd7oW8JV0b9NU9hdTqNZu5yciblicDq9spVchpjXyG5R2k7emVKTo0Vp_t7dpPmpAaWyf4eHG5kMNBBLvSGLgH-KWuGkV6Ph_3oc-4yCPZB1cZ2Dpkxije1tu6isRGOIyQQnYy5iZy-dSOBTWfPLlMc9MKc2DvJowAeAMFmgL2La3ila7-qzbwrV7jGIbz6pqMCp33ath7rgqYWUpww4ZZVkEinuENptR5X52ZckU3ifFiK6kZ__Wql92ZsLhijS55SRgcS8tUkXqNkOA3_liITe_4j8aNFi7zsL2Cls1vAnmiRHtFsLGSQGok_qzysCQx-zdyvO4LD-f08cMaNhIio6RNb2tkWwTNI4SIe4SdRbm1yBOFsaBOPHOmQwh1C2uR4DIFdXD0WH5Tq0tfmfow0rTI_gmxtF31YxjUlZADhoHLoKxvVHng0PVgVAfpa2KVAzqQr9Yc55dTYrudNlWb2liN5RNWmDCmhPLUuuwq1AFyeOqIGpA9joTn9SmI5p3gocBI2eZxY9K5fgzh94NZqLFZIdcV7HzjEM",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"till\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Просмотр расписания неавторизованным пользователем",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 401\", function () {\r",
-											"    pm.response.to.have.status(401);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.message).to.eql(\"Authentication required\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"till\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Просмотр расписания на 2135 год",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 404\", function () {\r",
-											"    pm.response.to.have.status(404);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(\"Page Not Found\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"2135-05-20T00:00:00+00:00\",\r\n    \"till\":\"2135-05-20T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Просмотр расписания на 1900 год",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 404\", function () {\r",
-											"    pm.response.to.have.status(404);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(\"Page Not Found\");\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"from\":\"1900-01-01T00:00:00+00:00\",\r\n    \"till\":\"1900-01-01T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"slot\", \"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events",
-									"host": [
-										"{{URL}}{{API}}events"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Просмотр расписания методом GET",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 405\", function () {\r",
-											"    pm.response.to.have.status(405);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}events?from=\"2022-05-15T00:00:00+00:00\"&till=\"2022-05-15T23:59:59+00:00\"",
-									"host": [
-										"{{URL}}{{API}}events"
-									],
-									"query": [
-										{
-											"key": "from",
-											"value": "\"2022-05-15T00:00:00+00:00\""
-										},
-										{
-											"key": "till",
-											"value": "\"2022-05-15T23:59:59+00:00\""
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Добавление личных событий",
-			"item": [
-				{
-					"name": "Позитивные",
-					"item": [
-						{
-							"name": "Событие 1 - сегодня",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"Take event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_1\", IdEvent);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"м\",\r\n    \"description\": \"название - одна буква на кириллице, длительность события - 1 минута, цветовая схема по умолчанию - серая\",\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T01:31:00+07:00\",\r\n    \"backgroundColor\": \"{{grey_b}}\",\r\n    \"color\": \"{{grey}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие 2 - в следующем месяце",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"Take event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_2\", IdEvent);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"TESTKSTEST\",\r\n    \"description\": \"название - 10 символов латиницы, длительность - 1 час 25 минут, выбрана цветовая схема - желтая, описание - максимум 500 символов! wwwwwwwwwwww wwwwwwwwwwwwww wwwwwwwwwwww wwwwwwwwwww wwwwwwwwwwwwwwww wwwwwwwwwww ww wwwwwwwwwwww wwwwwwwwwwwww wwwwwwwwww ww wwwwwwwwwwww wwwwwwwwwww wwwwwwwww wwwwwwwwwwwww wwwwwwww wwwwwwwwwwww wwwwwwwwwwwwwww wwwwwwwwww wwwwwwwwwww wwwwwwwwwww wwwwwwwwwww wwwwwwwwww wwwwwwww wwwwwwwwww wwwwwwww wwwwwwwwwww wwwwwwwwwww wwwwwwwww wwwwwwwwwww wwwwwwwwww wwwwwwwwwwww\",\r\n    \"startAt\": \"2022-06-15T01:30:00+07:00\",\r\n    \"endAt\": \"2022-06-15T03:25:00+07:00\",\r\n    \"backgroundColor\": \"{{yellow_b}}\",\r\n    \"color\": \"{{yellow}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие 3 - в прошлом месяце без описания",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"Take event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_3\", IdEvent);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"KS -название 40 символов, длит. 10 часов\",\r\n    \"description\": null,\r\n    \"startAt\": \"2022-04-15T01:30:00+07:00\",\r\n    \"endAt\": \"2022-04-15T11:30:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Негативные",
-					"item": [
-						{
-							"name": "Событие без названия",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T22:30:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:00:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие с длинным названием",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"KS событие, в названии более 40 символов.\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T22:30:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:00:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие без указания времени начала",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"KS событие без времени начала\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}\",\r\n    \"endAt\": \"{{current_date}}T23:00:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие 4, длительностью более 24 часов",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});\r",
-											"pm.test(\"Take event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_4\", IdEvent);\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"KS событие длительностью более 24 часов\",\r\n    \"description\": \"событие переходит с одной даты на другую\",\r\n    \"startAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"endAt\": \"2022-05-15T20:25:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие в 2025 году",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Нереально далекая дата\",\r\n    \"description\": \"возможность создания такого события приведет к засорению БД\",\r\n    \"startAt\": \"2025-05-20T00:00:00+00:00\",\r\n    \"endAt\": \"2025-05-20T10:00:00+00:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие, которое состоялось более года назад (01.04.2021)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});\r",
-											"pm.test(\"Take event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_6\", IdEvent);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Слишком старая дата\",\r\n    \"description\": \"возможность создания такого события приведет к засорению БД\",\r\n    \"startAt\": \"2021-04-01T00:00:00+00:00\",\r\n    \"endAt\": \"2021-04-01T10:00:00+00:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Начало и конец события совпадают",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"KS test\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T{{current_time}}+07:00\",\r\n    \"endAt\": \"{{current_date}}T{{current_time}}+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие без цветовой схемы",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"KS событие без цветовой схемы\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T19:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:25:00+07:00\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие 5, с цветовой схемой урока",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Take event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_5\", IdEvent);\r",
-											"});\r",
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"это недопустимая цветовая схема для личного события\",\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{blue_b}}\",\r\n    \"color\": \"{{blue}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Событие со значениями параметров в некорректных форматах",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": true,\r\n    \"description\": {\"data\": \"название - в формате boolean, описание - в формате JSON, цвет фона - массив значений, цвет - целое число\"},\r\n    \"startAt\": \"{{current_date}}T19:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:25:00+07:00\",\r\n    \"backgroundColor\": [\"{{green_b}}\",\"{{blue_b}}\",\"{{grey_b}}\",\"{{yellow_b}}\"],\r\n    \"color\": 999\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Изменение личных событий",
-			"item": [
-				{
-					"name": "Позитивные",
-					"item": [
-						{
-							"name": "Изменение всех параметров события 1",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});\r",
-											"pm.test(\"Take new event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_1\", IdEvent);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_1}},\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"стало фиолетовым и долгим\",\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:00:00+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Перенос события 2 в будущем на более раннюю дату",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});\r",
-											"pm.test(\"Take new event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_2\", IdEvent);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_2}},\r\n    \"title\": \"TESTKSTEST\",\r\n    \"startAt\": \"2022-06-05T10:30:00+07:00\",\r\n    \"endAt\": \"2022-06-05T12:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-06-15T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{yellow_b}}\",\r\n    \"color\": \"{{yellow}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Перенос события 3 из прошлого в будущее",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});\r",
-											"pm.test(\"Take new event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_3\", IdEvent);\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_3}},\r\n    \"title\": \"KS -название 40 символов, длит. 10 часов\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-06-05T05:30:00+07:00\",\r\n    \"endAt\": \"2022-06-05T17:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-04-15T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление необязательного параметра \"описание\" события 4",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Take new event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_4\", IdEvent);\r",
-											"});\r",
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"KS событие длительностью более 24 часов\",\r\n    \"description\": null,\r\n    \"startAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"endAt\": \"2022-05-16T20:25:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Перенос события без указания предыдущей даты начала",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_3}},\r\n    \"title\": \"oldStartAt - необязательный параметр\",\r\n    \"description\": null,\r\n    \"startAt\": \"2022-05-05T05:30:00+07:00\",\r\n    \"endAt\": \"2022-05-05T17:25:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Негативные",
-					"item": [
-						{
-							"name": "Обновление события без изменения параметров",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 304\", function () {\r",
-											"    pm.response.to.have.status(304);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});\r",
-											"pm.test(\"Take new event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_5\", IdEvent);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_5}},\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"это недопустимая цветовая схема для личного события\",\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{blue_b}}\",\r\n    \"color\": \"{{blue}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Изменение цвета события 5 на недопустимый черный фон",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Take new event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_5\", IdEvent);\r",
-											"});\r",
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_5}},\r\n    \"title\": \"Название всё равно не видно\",\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{black}}\",\r\n    \"color\": \"{{black}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление даты окончания события",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"КСА удаление окончания события\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-15T19:00:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-15T19:00:00+07:00\",\r\n    \"endAt\": \"\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Перенос даты окончания события ранее даты его начала",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"KS событие длительностью более 24 часов\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"endAt\": \"2022-05-11T12:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Перенос даты окончания через 5 месяцев от начала",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});\r",
-											"pm.test(\"Take new event Id\", function () {\r",
-											"    var jsonData = pm.response.json();\r",
-											"    var IdEvent = jsonData.data.payload.id;\r",
-											"    pm.environment.set(\"event_4\", IdEvent);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"KS событие длительностью 5 месяцев\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-10T19:00:00+07:00\",\r\n    \"endAt\": \"2022-10-05T12:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Добавление изображения в параметр \"описание\"",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 400\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_5}},\r\n    \"title\": \"KS test\",\r\n    \"description\": { \r\n        \"image\": {\r\n            \"mime\": \"image/jpeg\",\r\n            \"data\": \r\n            \"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\"\r\n        }\r\n    },\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}createPersonal",
-									"host": [
-										"{{URL}}{{API}}createPersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Изменение всех параметров методом PUT",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 405\", function () {\r",
-											"    pm.response.to.have.status(405);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_1}},\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"стало фиолетовым и долгим\",\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:00:00+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Перенос события методом PATCH",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 405\", function () {\r",
-											"    pm.response.to.have.status(405);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"id\": {{event_3}},\r\n    \"title\": \"KS -название 40 символов, длит. 10 часов\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-05T05:30:00+07:00\",\r\n    \"endAt\": \"2022-05-05T17:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-03-15T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}updatePersonal",
-									"host": [
-										"{{URL}}{{API}}updatePersonal"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Удаление личных событий",
-			"item": [
-				{
-					"name": "Позитивные",
-					"item": [
-						{
-							"name": "Удаление события 1",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(true);\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление события 2",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(true);\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"2022-06-05T10:30:00+07:00\",\r\n    \"id\": {{event_2}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление события 3",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(true);\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"2022-06-05T05:30:00+07:00\",\r\n    \"id\": {{event_3}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление события 4",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(true);\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"2022-05-10T19:00:00+07:00\",\r\n    \"id\": {{event_4}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление события 5",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(true);\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"id\": {{event_5}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление события 6",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(true);\r",
-											"  pm.expect(responseJson.errors).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"2021-03-01T00:00:00+00:00\",\r\n    \"id\": {{event_6}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Негативные",
-					"item": [
-						{
-							"name": "Повторное удаление события 1",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 404\", function () {\r",
-											"    pm.response.to.have.status(404);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление события с указанием неверной даты начала",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 404\", function () {\r",
-											"    pm.response.to.have.status(404);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"2000-01-01T19:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление несуществующего события с некорректным id",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 404\", function () {\r",
-											"    pm.response.to.have.status(404);\r",
-											"});\r",
-											"pm.test(\"check response body\", () => {\r",
-											"  const responseJson = pm.response.json();\r",
-											"  pm.expect(responseJson.data).to.eql(null);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": \"e123\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Удаление события методом DELETE",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 405\", function () {\r",
-											"    pm.response.to.have.status(405);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}{{API}}removePersonal",
-									"host": [
-										"{{URL}}{{API}}removePersonal"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					"Date.prototype.format = function(format = 'yyyy-mm-dd') {",
-					"    const replaces = {",
-					"        yyyy: this.getFullYear(),",
-					"        mm: ('0'+(this.getMonth() + 1)).slice(-2),",
-					"        dd: ('0'+this.getDate()).slice(-2),",
-					"        hh: ('0'+this.getHours()).slice(-2),",
-					"        MM: ('0'+this.getMinutes()).slice(-2),",
-					"        ss: ('0'+this.getSeconds()).slice(-2)",
-					"    };",
-					"    let result = format;",
-					"    for(const replace in replaces){",
-					"        result = result.replace(replace,replaces[replace]);",
-					"    }",
-					"    return result;",
-					"};",
-					"var current_date = (new Date()).format('yyyy-mm-dd');",
-					"pm.environment.set(\"current_date\", current_date);",
-					"var current_time = (new Date()).format('hh:MM:ss');",
-					"pm.environment.set(\"current_time\", current_time);"
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	]
+  "info": {
+    "_postman_id": "b5f1cc5e-57af-44a8-a60a-c7fcae566d1d",
+    "name": "Расписание: личные события",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19266110"
+  },
+  "item": [
+    {
+      "name": "Просмотр расписания",
+      "item": [
+        {
+          "name": "Позитивные",
+          "item": [
+            {
+              "name": "Личные события за текущий день",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"{{current_date}}T00:00:00+00:00\",\r\n    \"till\":\"{{current_date}}T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Личные события в следующем месяце",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"2022-06-15T00:00:00+00:00\",\r\n    \"till\":\"2022-06-15T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Личные события в прошлом месяце",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"2022-04-15T00:00:00+00:00\",\r\n    \"till\":\"2022-04-15T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Негативные",
+          "item": [
+            {
+              "name": "Запрос расписания с начальной датой позже конечной",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"2022-05-20T00:00:00+00:00\",\r\n    \"till\":\"2022-05-15T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Запрос с просроченным токеном",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 401\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.message).to.eql(\"Authentication required\");\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEwMzM4NzM2LCJpZGVudGl0eSI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJpZGVudGl0eUxvZ2luIjpudWxsLCJpZGVudGl0eUVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsImlkZW50aXR5UGhvbmUiOm51bGwsIm5hbWUiOiJNb2JpbGUiLCJzdXJuYW1lIjoiVGVzdDEiLCJlbWFpbCI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJ1aUxhbmd1YWdlIjoicnUiLCJsb2NhbGUiOiJydSIsInNlcnZpY2VMb2NhbGUiOm51bGwsInVhcyI6MzAsImp3dFR5cGUiOjEsImp0aSI6IlF1bmVhUm5Yd0h1bDhWM0h2MkVzQlZxMFlWTmFyQUNoIiwiYnJhbmQiOm51bGwsImV4cCI6MTY0ODczODAyMCwiYXZhdGFyVXJsIjoiaHR0cHM6XC9cL2F1dGgtYXZhdGFycy1za3llbmcuaW1naXgubmV0XC8xMDMzODczNlwvMWRkOTM1YTgtZGYyMS00NmM2LWEwM2MtMzVlOTFlMWRlZGVmP2F1dG89Zm9ybWF0JTJDZW5oYW5jZSZmaXQ9Y3JvcCZoPTIwMCZpeGxpYj1waHAtMi4xLjEmcT03NSZzYXQ9OCZzaGFycD0xMCZ2aWI9OCZ3PTIwMCIsImFUeXBlIjoiVVNFUk5BTUVfUEFTU1dPUkQiLCJhVGltZSI6MTY0NTEwMzEzMywicm9sZXMiOlsiUk9MRV9URUFDSEVSIiwiUk9MRV9DUk0yX1RFQUNIRVJfQUNDRVNTIiwiUk9MRV9UVENfVVNBR0UiLCJST0xFX1ZJTUJPWF9URUFDSEVSX1VTQUdFIiwiUk9MRV9WSU1CT1hfQ1JFQVRFX1NDUkVFTklOR19URVNUIl19.WffFzgxjG7hwSV1zWB7T5h8RMtgTsUmFXYRTQRFTPxfeW-aSxX3SpAdLgavSz_xB66_gd-S3_NjIfPf8l66oHDWfNX8bPIoEg8pk7g3YEM2uPH4cC57HdTMXpYSbGbjuTHoR7bLLd7oW8JV0b9NU9hdTqNZu5yciblicDq9spVchpjXyG5R2k7emVKTo0Vp_t7dpPmpAaWyf4eHG5kMNBBLvSGLgH-KWuGkV6Ph_3oc-4yCPZB1cZ2Dpkxije1tu6isRGOIyQQnYy5iZy-dSOBTWfPLlMc9MKc2DvJowAeAMFmgL2La3ila7-qzbwrV7jGIbz6pqMCp33ath7rgqYWUpww4ZZVkEinuENptR5X52ZckU3ifFiK6kZ__Wql92ZsLhijS55SRgcS8tUkXqNkOA3_liITe_4j8aNFi7zsL2Cls1vAnmiRHtFsLGSQGok_qzysCQx-zdyvO4LD-f08cMaNhIio6RNb2tkWwTNI4SIe4SdRbm1yBOFsaBOPHOmQwh1C2uR4DIFdXD0WH5Tq0tfmfow0rTI_gmxtF31YxjUlZADhoHLoKxvVHng0PVgVAfpa2KVAzqQr9Yc55dTYrudNlWb2liN5RNWmDCmhPLUuuwq1AFyeOqIGpA9joTn9SmI5p3gocBI2eZxY9K5fgzh94NZqLFZIdcV7HzjEM",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"till\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Просмотр расписания неавторизованным пользователем",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 401\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.message).to.eql(\"Authentication required\");\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"till\":\"{{current_date}}T04:00:00+07:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Просмотр расписания на 2135 год",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(\"Page Not Found\");\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"2135-05-20T00:00:00+00:00\",\r\n    \"till\":\"2135-05-20T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Просмотр расписания на 1900 год",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(\"Page Not Found\");\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"from\":\"1900-01-01T00:00:00+00:00\",\r\n    \"till\":\"1900-01-01T23:59:59+00:00\",\r\n    \"onlyTypes\":[\"slot\", \"event\"],\r\n    \"statuses\": [\"without_status\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events",
+                  "host": ["{{URL}}{{API}}events"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Просмотр расписания методом GET",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 405\", function () {\r",
+                      "    pm.response.to.have.status(405);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}events?from=\"2022-05-15T00:00:00+00:00\"&till=\"2022-05-15T23:59:59+00:00\"",
+                  "host": ["{{URL}}{{API}}events"],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "\"2022-05-15T00:00:00+00:00\""
+                    },
+                    {
+                      "key": "till",
+                      "value": "\"2022-05-15T23:59:59+00:00\""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Добавление личных событий",
+      "item": [
+        {
+          "name": "Позитивные",
+          "item": [
+            {
+              "name": "Событие 1 - сегодня",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Take event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_1\", IdEvent);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"м\",\r\n    \"description\": \"название - одна буква на кириллице, длительность события - 1 минута, цветовая схема по умолчанию - серая\",\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T01:31:00+07:00\",\r\n    \"backgroundColor\": \"{{grey_b}}\",\r\n    \"color\": \"{{grey}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие 2 - в следующем месяце",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Take event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_2\", IdEvent);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"TESTKSTEST\",\r\n    \"description\": \"название - 10 символов латиницы, длительность - 1 час 25 минут, выбрана цветовая схема - желтая, описание - максимум 500 символов! wwwwwwwwwwww wwwwwwwwwwwwww wwwwwwwwwwww wwwwwwwwwww wwwwwwwwwwwwwwww wwwwwwwwwww ww wwwwwwwwwwww wwwwwwwwwwwww wwwwwwwwww ww wwwwwwwwwwww wwwwwwwwwww wwwwwwwww wwwwwwwwwwwww wwwwwwww wwwwwwwwwwww wwwwwwwwwwwwwww wwwwwwwwww wwwwwwwwwww wwwwwwwwwww wwwwwwwwwww wwwwwwwwww wwwwwwww wwwwwwwwww wwwwwwww wwwwwwwwwww wwwwwwwwwww wwwwwwwww wwwwwwwwwww wwwwwwwwww wwwwwwwwwwww\",\r\n    \"startAt\": \"2022-06-15T01:30:00+07:00\",\r\n    \"endAt\": \"2022-06-15T03:25:00+07:00\",\r\n    \"backgroundColor\": \"{{yellow_b}}\",\r\n    \"color\": \"{{yellow}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие 3 - в прошлом месяце без описания",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"Take event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_3\", IdEvent);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"KS -название 40 символов, длит. 10 часов\",\r\n    \"description\": null,\r\n    \"startAt\": \"2022-04-15T01:30:00+07:00\",\r\n    \"endAt\": \"2022-04-15T11:30:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Негативные",
+          "item": [
+            {
+              "name": "Событие без названия",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T22:30:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:00:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие с длинным названием",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"KS событие, в названии более 40 символов.\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T22:30:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:00:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие без указания времени начала",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"KS событие без времени начала\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}\",\r\n    \"endAt\": \"{{current_date}}T23:00:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие 4, длительностью более 24 часов",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});\r",
+                      "pm.test(\"Take event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_4\", IdEvent);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"KS событие длительностью более 24 часов\",\r\n    \"description\": \"событие переходит с одной даты на другую\",\r\n    \"startAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"endAt\": \"2022-05-15T20:25:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие в 2025 году",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Нереально далекая дата\",\r\n    \"description\": \"возможность создания такого события приведет к засорению БД\",\r\n    \"startAt\": \"2025-05-20T00:00:00+00:00\",\r\n    \"endAt\": \"2025-05-20T10:00:00+00:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие, которое состоялось более года назад (01.04.2021)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});\r",
+                      "pm.test(\"Take event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_6\", IdEvent);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Слишком старая дата\",\r\n    \"description\": \"возможность создания такого события приведет к засорению БД\",\r\n    \"startAt\": \"2021-04-01T00:00:00+00:00\",\r\n    \"endAt\": \"2021-04-01T10:00:00+00:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Начало и конец события совпадают",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"KS test\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T{{current_time}}+07:00\",\r\n    \"endAt\": \"{{current_date}}T{{current_time}}+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие без цветовой схемы",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"KS событие без цветовой схемы\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"{{current_date}}T19:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:25:00+07:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие 5, с цветовой схемой урока",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Take event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_5\", IdEvent);\r",
+                      "});\r",
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"это недопустимая цветовая схема для личного события\",\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{blue_b}}\",\r\n    \"color\": \"{{blue}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Событие со значениями параметров в некорректных форматах",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": true,\r\n    \"description\": {\"data\": \"название - в формате boolean, описание - в формате JSON, цвет фона - массив значений, цвет - целое число\"},\r\n    \"startAt\": \"{{current_date}}T19:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:25:00+07:00\",\r\n    \"backgroundColor\": [\"{{green_b}}\",\"{{blue_b}}\",\"{{grey_b}}\",\"{{yellow_b}}\"],\r\n    \"color\": 999\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Изменение личных событий",
+      "item": [
+        {
+          "name": "Позитивные",
+          "item": [
+            {
+              "name": "Изменение всех параметров события 1",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});\r",
+                      "pm.test(\"Take new event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_1\", IdEvent);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_1}},\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"стало фиолетовым и долгим\",\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:00:00+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Перенос события 2 в будущем на более раннюю дату",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});\r",
+                      "pm.test(\"Take new event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_2\", IdEvent);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_2}},\r\n    \"title\": \"TESTKSTEST\",\r\n    \"startAt\": \"2022-06-05T10:30:00+07:00\",\r\n    \"endAt\": \"2022-06-05T12:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-06-15T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{yellow_b}}\",\r\n    \"color\": \"{{yellow}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Перенос события 3 из прошлого в будущее",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});\r",
+                      "pm.test(\"Take new event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_3\", IdEvent);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_3}},\r\n    \"title\": \"KS -название 40 символов, длит. 10 часов\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-06-05T05:30:00+07:00\",\r\n    \"endAt\": \"2022-06-05T17:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-04-15T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление необязательного параметра \"описание\" события 4",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Take new event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_4\", IdEvent);\r",
+                      "});\r",
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"KS событие длительностью более 24 часов\",\r\n    \"description\": null,\r\n    \"startAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"endAt\": \"2022-05-16T20:25:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Перенос события без указания предыдущей даты начала",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_3}},\r\n    \"title\": \"oldStartAt - необязательный параметр\",\r\n    \"description\": null,\r\n    \"startAt\": \"2022-05-05T05:30:00+07:00\",\r\n    \"endAt\": \"2022-05-05T17:25:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Негативные",
+          "item": [
+            {
+              "name": "Обновление события без изменения параметров",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 304\", function () {\r",
+                      "    pm.response.to.have.status(304);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});\r",
+                      "pm.test(\"Take new event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_5\", IdEvent);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_5}},\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"это недопустимая цветовая схема для личного события\",\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{blue_b}}\",\r\n    \"color\": \"{{blue}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Изменение цвета события 5 на недопустимый черный фон",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Take new event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_5\", IdEvent);\r",
+                      "});\r",
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_5}},\r\n    \"title\": \"Название всё равно не видно\",\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{black}}\",\r\n    \"color\": \"{{black}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление даты окончания события",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"КСА удаление окончания события\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-15T19:00:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-15T19:00:00+07:00\",\r\n    \"endAt\": \"\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Перенос даты окончания события ранее даты его начала",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"KS событие длительностью более 24 часов\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"endAt\": \"2022-05-11T12:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Перенос даты окончания через 5 месяцев от начала",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});\r",
+                      "pm.test(\"Take new event Id\", function () {\r",
+                      "    var jsonData = pm.response.json();\r",
+                      "    var IdEvent = jsonData.data.payload.id;\r",
+                      "    pm.environment.set(\"event_4\", IdEvent);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_4}},\r\n    \"title\": \"KS событие длительностью 5 месяцев\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-10T19:00:00+07:00\",\r\n    \"endAt\": \"2022-10-05T12:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-05-12T19:00:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Добавление изображения в параметр \"описание\"",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_5}},\r\n    \"title\": \"KS test\",\r\n    \"description\": { \r\n        \"image\": {\r\n            \"mime\": \"image/jpeg\",\r\n            \"data\": \r\n            \"/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUEBAUEAwUFBAUGBgUGCA4JCAcHCBEMDQoOFBEVFBMRExMWGB8bFhceFxMTGyUcHiAhIyMjFRomKSYiKR8iIyL/2wBDAQYGBggHCBAJCRAiFhMWIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAEOAeADASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAUGAQQHAgMI/8QAPBABAAIBAwIDBAUKBQUAAAAAAAECAwQFESFBBhIxUXGBsRMiNlJ0BzI0QlNhkaHB0RQjJGJyJTND4fD/xAAaAQEAAwEBAQAAAAAAAAAAAAAABAUGAwEC/8QALxEBAAIBAgUCBQMEAwAAAAAAAAECAwQRBRIhMXEGIhMzNEFRI4HBJKGx4TJhkf/aAAwDAQACEQMRAD8A/VYCd3Z4AegAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8Zs2PT4b5c9648VI5te88RHve3Jvyi75k1O6TtWO9owaaKzkiJ/OvMc9fbxHH8UnR6W2qy/Dqr+Ja6uhwTlnrP28rZqfyibDp8s0rlz5uP1sWKZj+be27xjs255Ipp9XFMk+lM1ZpMz7I56fzcJjo9NBPAsPLtFp3ZCvqnVc+81jZ+k4nkcT2HxtuOy+TDaY1Okj/xZJ61/427OpbJ4o2/fcMTpMvlzfr4MnS9fh3j3KTVcPzabrMbx+Wp0HGNNrI2idrfiU0AgrYABi1or1tPEd57RCPyb1o6X8sXtf99a9Edv+tn6SmlpM+WI5ycd/ZCCmeUzDpovXeyq1WvnHaaUhccW76PNby1yxW3sv0lvR1jmHP46ct/R7pqNH9WJi+OfWl+v8PY9vo9o3o54OKbzy5IXEaGi3PTayOKX8t+9LdJb6HNZrO0ral63jes7wAPH2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOCeKZ83izdJ9uot/b+jvfZwPxP9q90/EW+a74F8+3j+WV9VfT08oYBq2DemaXtjvF8drVvWeYtWeJhgfMxu9iduy+bD+UfU6WaYN5pOpwekZ6/n198ek/yn3ul7fuej3XSRqNBqKZsc/dnrHvjtL878NrQbhq9r1ddRoc98OSPuz0n3x3hTavg2PL7sXtn+zScN9RZtPMUze6v9/9v0UKBsH5RtPnrXBvVPoMn7ev5k++O3y9y+48tctIvjtW9LRzW1J5ifizefTZcFuXJGza6XXYNVTmxW3/AMqhvFv+sajp6THyhoNveb8b5qa8ekx8oacW5WeL5ceFBqJ3y28sjPLD7cuxSZrPMTMT7YTOi33Lh+pqYnLj7Tz9aP7oZ6c7465I2s64s18c70nZeNPqsOqp58GSt6/u7fB9lEpny4LxbDeaW9sJzR+IIvEV1kcW/aR6fFAyaS1OtesLnT8Qpk6X6Snx5pkplpF8dotSfSYekVYgA9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOzgfif7V7p+It83fOzgfif7V7p+It813wL59vDK+qvp6eUMA1bBgAAACY2XxLuOw5f8AQ5ucE+unv1pPw7fBDjnkxUy15bxvDrhzZMNufHO0rlqPEsbnuOXV/Rzi+k45p5ueJiOPX4JHS66uXp5octyam2DV28tprMcdYS+g3iaW+vPxVmTR1r0r2hocOstkjmv3l0qmSJe4nlWNDusWtz5uY7wm8Grpkj6s/BBtjtWUylotDd7EejxW8TEvUS5y6jMMANnS67PorTOC/ET61nrErFot7wan6mXjFl7Raek/FVGY9JcMmnpk8pOn1eTDPfeF/ieYFP0e8ajSTNZn6XF3pbt7pWTR7hg1tJ+ht9aPWlukwrsmC+Pv2XeDV480dJ2n8NwBySwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADs4H4n+1e6fiLfN3zs4J4n+1e6fiLfNd8C+fbwyvqr6enlCgNWwYAAAAACE1s8a/L8Pk+VMtqz0l9Nd+n5fh8mvDnMLSk7VhJabcL456WmFj0O8WiI5lTI7vrTNanpLjfFW0O9Ms1l1LSbpW8R9ZM4c8Xpy5RotztjnraeFu23dPpLcTb07K7Lppr1hYYc0W7rhExPoNbBk89Wz3lCmNkqJ3AHj6Ck2reLUtNbR6TE8SAJ3Rb7fHEU1UTkr2tH50f3T2HPjz44vhvW9Z7xKjvWDUZdNmjJhvNJj2d0PLpYnrTusdPxC9Ol+sL2Izad1jXU+jy9NRWOsfe/elIlX2rNZ2ld48lcleavZgB4+wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADs4H4n+1e6fiLfN3zs4H4n+1e6fiLfNd8C+fbwyvqr6enlDANWwYAAAAACF136fk+HyazZ1v6fk+Hya74WdP+MMAzw8es0niyf2nNeMiCx47Wn6scrHtOlvOT0cc23L1SMXde9uvacVeZSleqM27FamKvKShR5O64xx7XsB8PsAAABs6DLbT7jgyUnrFoj+M8Lup216b/Ebjj5jmlJ81lxhW6vbnj8rzhcW+HMz2AERZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHZwPxP9q90/EW+bvnZwTxP9q90/EW+a74F8+3hlfVX09PKFAatgwAAAAAELrf0/J8Pk1mzrY/12T4fJ5x6a9+e3D4mYjutcVd4h8q15bWDR3vfj0Seh2fLktHMcezotOg2iKzWJmOfciZdRFeyTj08ygNFtU/8A0LXt+3Vx0jp6JLDoaY+sxEt2tIrHSFfkz8yfiwxV5w08tIh9uzERxDPCJM7pMRsyAPQZhsaXR5tbl8uCvmjvf9WPi8taKxvL2tbWnasby1khotq1Gr5m1fosf3rd/dCb0OyYtLNb5pjLkj2x0j3QlOEHLq/tRbafh3a2X/xraPQ4dHh8mKOve0+s+9tR0BBmZmd5WtYisbQAD7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOzgfif7V7p+It83fOzgfif7V7p+It813wL59vDK+qvp6eUMA1bBgAAMgwPVaXyXimKk3vaeIrWOZmf3Qvew/k71GqnHn3i1tPiniYw1j/Mt7/u/P3I+o1eLT13yTsmaTQ59XblxV3/AMOe10E6nU3npxPHwTeg2aeY9Fu1+xaXSb5nwaTFGPDTy+WnPPH1Y7tjFgikccRKstrfixvVf49H8KeS3eOiO0u3Vx4483HVJ4sMVjo+vliI9GYhEteZnqk1pEHHEDI+H2z2YGY/n2gGH0x475beTFWb3n0iEnotkzZrebU/5VPZz9b/ANLHptLh0tJrgpFefX96Jl1dadI6p+m4fbJ7rdIQuj2GOltZPPHWKVnp8ZTuLHXHSKUjisdIiHsQL5LXneV1hwUxRtWAB8OwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB2cD8T/avdPxFvm744N4txWxeMt0rPfN5o90xz/Vd8Cn9e3j+WW9VR/TUn/tBgNWwQCU2jYtw3zN9HoME2pE8Wy26Ur75/p6vjJkpjjmvO0OmLFfLaKUjeUWs2weDNy3ukZppOl0lusZcteto/wBte6/7B4A2/a/Ln1sxrdVXvav1K+6v9Z5W2K8M9q+N7+3BH7tdw/0xPS+qn9o/lCbH4Y27YcUf4XF58/6+fL1vb+0fuhPRLzwzHdn73teea87y2GHDjw05McbQpm8dN61Pvj5Q0Y7pPeq8bvmn73E/yR0R6rfDP6cMznj9W3l6YlhmHRyYZh99NpM+ry+TBTze2Z9IT+h2LDhrFtRP01/ZP5v8HDJnpj8pODS5M09O35Q+j2vUay3Na+XF9+e/u9qxaHbcGip9Svnyd729W9wcK/LqLZOn2XWDRY8XXvLIDgmdgB6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgePfC2fcPJuW344yZ8dfLmxV9bVj0mP3x8vd1v7Exy7afPfT5IyVRNZo8eswziydpfmy9Zpea3ia2j1i0cTHwbOi2/WbjnjFoNNlz2n9nWZj+PpHxfoTLodLqbebUafDltHe+OJ+cPpXHTHXy46VpEdqxELq3Hrbe2nXyzFPSkRb3ZOnj/AG51sX5NqUtTPvuSMlo6xp8c9I/5T3+H83QdPp8Wlw1xafHTFipHFaUjiIj3PsKbUarLqLb5J3aXR6DT6Ou2Kv7/AHZj0AR00ABD7xt86qkZcP8A3aR+b96PYrPWJmJjiY9Ylfni+Kl+PPWtuPTzViUrFqZpXbZXajQ1y25onZRseO+W3lx0vef9scpvR7BzHm1s8eylZ+crBFa1jita190PoZNXa0bR0eYOHY6Tvbq+FMdMVIripFKx2rHR6h78pwjd1j26QwAESAD0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAPQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/9k=\"\r\n        }\r\n    },\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"endAt\": \"{{current_date}}T23:31:02+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}createPersonal",
+                  "host": ["{{URL}}{{API}}createPersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Изменение всех параметров методом PUT",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 405\", function () {\r",
+                      "    pm.response.to.have.status(405);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_1}},\r\n    \"title\": \"КСА test\",\r\n    \"description\": \"стало фиолетовым и долгим\",\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"endAt\": \"{{current_date}}T20:00:00+07:00\",\r\n    \"oldStartAt\": \"{{current_date}}T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{plum_b}}\",\r\n    \"color\": \"{{plum}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Перенос события методом PATCH",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [""],
+                    "type": "text/javascript"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 405\", function () {\r",
+                      "    pm.response.to.have.status(405);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": {{event_3}},\r\n    \"title\": \"KS -название 40 символов, длит. 10 часов\",\r\n    \"description\": \"\",\r\n    \"startAt\": \"2022-05-05T05:30:00+07:00\",\r\n    \"endAt\": \"2022-05-05T17:25:00+07:00\",\r\n    \"oldStartAt\": \"2022-03-15T01:30:00+07:00\",\r\n    \"backgroundColor\": \"{{green_b}}\",\r\n    \"color\": \"{{green}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}updatePersonal",
+                  "host": ["{{URL}}{{API}}updatePersonal"]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Удаление личных событий",
+      "item": [
+        {
+          "name": "Позитивные",
+          "item": [
+            {
+              "name": "Удаление события 1",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(true);\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление события 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(true);\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"2022-06-05T10:30:00+07:00\",\r\n    \"id\": {{event_2}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление события 3",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(true);\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"2022-06-05T05:30:00+07:00\",\r\n    \"id\": {{event_3}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление события 4",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(true);\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"2022-05-10T19:00:00+07:00\",\r\n    \"id\": {{event_4}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление события 5",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(true);\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"{{current_date}}T22:31:02+07:00\",\r\n    \"id\": {{event_5}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление события 6",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(true);\r",
+                      "  pm.expect(responseJson.errors).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"2021-03-01T00:00:00+00:00\",\r\n    \"id\": {{event_6}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Негативные",
+          "item": [
+            {
+              "name": "Повторное удаление события 1",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление события с указанием неверной даты начала",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"2000-01-01T19:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление несуществующего события с некорректным id",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 404\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "});\r",
+                      "pm.test(\"check response body\", () => {\r",
+                      "  const responseJson = pm.response.json();\r",
+                      "  pm.expect(responseJson.data).to.eql(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": \"e123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление события методом DELETE",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 405\", function () {\r",
+                      "    pm.response.to.have.status(405);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startAt\": \"{{current_date}}T01:00:00+07:00\",\r\n    \"id\": {{event_1}}\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{URL}}{{API}}removePersonal",
+                  "host": ["{{URL}}{{API}}removePersonal"]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "Date.prototype.format = function(format = 'yyyy-mm-dd') {",
+          "    const replaces = {",
+          "        yyyy: this.getFullYear(),",
+          "        mm: ('0'+(this.getMonth() + 1)).slice(-2),",
+          "        dd: ('0'+this.getDate()).slice(-2),",
+          "        hh: ('0'+this.getHours()).slice(-2),",
+          "        MM: ('0'+this.getMinutes()).slice(-2),",
+          "        ss: ('0'+this.getSeconds()).slice(-2)",
+          "    };",
+          "    let result = format;",
+          "    for(const replace in replaces){",
+          "        result = result.replace(replace,replaces[replace]);",
+          "    }",
+          "    return result;",
+          "};",
+          "var current_date = (new Date()).format('yyyy-mm-dd');",
+          "pm.environment.set(\"current_date\", current_date);",
+          "var current_time = (new Date()).format('hh:MM:ss');",
+          "pm.environment.set(\"current_time\", current_time);"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ]
 }
