@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "0ae36705-413c-4f45-bb1e-d863571cc6a5",
+		"name": "Видеопрактика",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19266110"
+	},
+	"item": [
+		{
+			"name": "Получение списка видео",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"    <table>\r",
+							"        <tr>\r",
+							"            <th>КАТЕГОРИЯ</th>\r",
+							"            <th>КОЛИЧЕСТВО ВИДЕО</th>\r",
+							"        </tr>\r",
+							"\r",
+							"        {{#each response}}\r",
+							"            <tr>\r",
+							"                <td>{{title}}</td>\r",
+							"                <td>{{lessons.count}}</td>\r",
+							"            </tr>\r",
+							"        {{/each}}\r",
+							"\r",
+							"    </table>\r",
+							"`;\r",
+							"\r",
+							"pm.visualizer.set(template, {\r",
+							"    response: pm.response.json()\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Path}}",
+					"host": [
+						"{{URL}}{{Path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос по протоколу HTTP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api-vimbox.skyeng.ru/{{Path}}",
+					"protocol": "http",
+					"host": [
+						"api-vimbox",
+						"skyeng",
+						"ru"
+					],
+					"path": [
+						"{{Path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос в неправильную версию API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api-vimbox.skyeng.ru/api/v2/compilations/showcase",
+					"protocol": "https",
+					"host": [
+						"api-vimbox",
+						"skyeng",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v2",
+						"compilations",
+						"showcase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос в неправильный эндпоинт",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api-vimbox.skyeng.ru/api/v1/notifications",
+					"protocol": "https",
+					"host": [
+						"api-vimbox",
+						"skyeng",
+						"ru"
+					],
+					"path": [
+						"api",
+						"v1",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение списка неавторизованным пользователем",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Path}}",
+					"host": [
+						"{{URL}}{{Path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение списка методом POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Path}}",
+					"host": [
+						"{{URL}}{{Path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение списка методом PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Path}}",
+					"host": [
+						"{{URL}}{{Path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение списка методом DELETE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{Path}}",
+					"host": [
+						"{{URL}}{{Path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос с неправильным URL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api-vimbox.skyeng.com/{{Path}}",
+					"protocol": "https",
+					"host": [
+						"api-vimbox",
+						"skyeng",
+						"com"
+					],
+					"path": [
+						"{{Path}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEwMzM4NzM2LCJpZGVudGl0eSI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJpZGVudGl0eUxvZ2luIjpudWxsLCJpZGVudGl0eUVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsImlkZW50aXR5UGhvbmUiOiIrNzk2NDU0ODIxNTUiLCJuYW1lIjoiXHUwNDIxXHUwNDMyXHUwNDRmXHUwNDQyXHUwNDNlXHUwNDQxXHUwNDNiXHUwNDMwXHUwNDMyIiwic3VybmFtZSI6Ilx1MDQyMFx1MDQzMFx1MDQzN1x1MDQzMlx1MDQzMFx1MDQzYlx1MDQ0Zlx1MDQzNVx1MDQzMiIsImVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsInVpTGFuZ3VhZ2UiOiJydSIsImxvY2FsZSI6InJ1Iiwic2VydmljZUxvY2FsZSI6bnVsbCwidWFzIjozMCwiand0VHlwZSI6MSwianRpIjoiVmY4S1BmeTVPOFhwZm9RZE91ZUV5RU9MNmRXbXZxRkEiLCJicmFuZCI6bnVsbCwiZXhwIjoxNjU4NDE1OTc0LCJhdmF0YXJVcmwiOiJodHRwczpcL1wvYXV0aC1hdmF0YXJzLXNreWVuZy5pbWdpeC5uZXRcLzEwMzM4NzM2XC8xZGQ5MzVhOC1kZjIxLTQ2YzYtYTAzYy0zNWU5MWUxZGVkZWY_YXV0bz1mb3JtYXQlMkNlbmhhbmNlJmZpdD1jcm9wJmg9MjAwJml4bGliPXBocC0yLjEuMSZxPTc1JnNhdD04JnNoYXJwPTEwJnZpYj04Jnc9MjAwIiwiYmlydGhkYXkiOiIxOTcxLTAzLTA1IiwiYVR5cGUiOiJVU0VSTkFNRV9QQVNTV09SRCIsImFUaW1lIjoxNjUwODIwMDkyLCJyb2xlcyI6WyJST0xFX1RFQUNIRVIiLCJST0xFX0NSTTJfVEVBQ0hFUl9BQ0NFU1MiLCJST0xFX1RUQ19VU0FHRSIsIlJPTEVfVklNQk9YX1RFQUNIRVJfVVNBR0UiLCJST0xFX1ZJTUJPWF9DUkVBVEVfU0NSRUVOSU5HX1RFU1QiXX0.au-oc8Q0KLsFpQi8Qn09jKVyDIDHis_U7oyT6nZ7boBVpqCGCV-lUPJepVYL9Xk8utG4YssGZ04ybliRxn9NXLcJrl50d6dYVLPwjc0qZZF7Tpv-QhRu1sh_rsW8om51enuZHNGsdYeKv83k7ZjN5_tpCS3MwUl1xDJxUuz3G6fPK4-2n7DI7CC3Yx3XDyA8Yu857BZdasr5JFhGy4nfTbZVF3uiOnjQYCFPoMhfE6b1nO79qwnskVWyjcJlnvI-FFPN8IryLx40XbjX5jIZM32H_WbVNZXkhDp9DWNHH0MmJ1bOXOdnBogpBtYpRPs2BPL_3TYwGMvJ1zxP-a96-1quzpR9ng7v225fmLCVm47yfRVKnjoVITfbMFAbtduXxJANc1ECR4dLhukeUFLmt6AtAdOBkjo19VcMJ71C0bkedT2L8Pae0jR4qX07hUx2XchMoGoSaCMVjifPhsHS1gBNIdvmMzjk5B89wxEeK2wVxq5jr8egV9d0CqI2euSUAT6WEcJXn4zDUDVPlaYYfHOhFQ-gtAZGK4sxrQ-NFtrpi1kMioYBog5bpS37XFL07YxpEUsLfDwyWG_7MWMmpaPfQ3iDAbvbLcdUMJgQunjWZl_FJH4mQs14bdNqna4SbgoEji_kvUFMcbY882OUaQPJOpMGx4Guxh9T-YJ1GTY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://api-vimbox.skyeng.ru/",
+			"type": "string"
+		},
+		{
+			"key": "Path",
+			"value": "api/v1/compilations/showcase",
+			"type": "string"
+		}
+	]
+}
