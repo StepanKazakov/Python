@@ -60,8 +60,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Status code is 308\", function () {\r",
+							"    pm.response.to.have.status(308);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -74,6 +74,38 @@
 				"url": {
 					"raw": "http://api-vimbox.skyeng.ru/{{Path}}",
 					"protocol": "http",
+					"host": [
+						"api-vimbox",
+						"skyeng",
+						"ru"
+					],
+					"path": [
+						"{{Path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос без указания протокола",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 302\", function () {\r",
+							"    pm.response.to.have.status(302);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api-vimbox.skyeng.ru/{{Path}}",
 					"host": [
 						"api-vimbox",
 						"skyeng",
@@ -267,39 +299,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Запрос с неправильным URL",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {\r",
-							"    pm.response.to.have.status(404);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://api-vimbox.skyeng.com/{{Path}}",
-					"protocol": "https",
-					"host": [
-						"api-vimbox",
-						"skyeng",
-						"com"
-					],
-					"path": [
-						"{{Path}}"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"auth": {
@@ -307,7 +306,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEwMzM4NzM2LCJpZGVudGl0eSI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJpZGVudGl0eUxvZ2luIjpudWxsLCJpZGVudGl0eUVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsImlkZW50aXR5UGhvbmUiOiIrNzk2NDU0ODIxNTUiLCJuYW1lIjoiXHUwNDIxXHUwNDMyXHUwNDRmXHUwNDQyXHUwNDNlXHUwNDQxXHUwNDNiXHUwNDMwXHUwNDMyIiwic3VybmFtZSI6Ilx1MDQyMFx1MDQzMFx1MDQzN1x1MDQzMlx1MDQzMFx1MDQzYlx1MDQ0Zlx1MDQzNVx1MDQzMiIsImVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsInVpTGFuZ3VhZ2UiOiJydSIsImxvY2FsZSI6InJ1Iiwic2VydmljZUxvY2FsZSI6bnVsbCwidWFzIjozMCwiand0VHlwZSI6MSwianRpIjoiVmY4S1BmeTVPOFhwZm9RZE91ZUV5RU9MNmRXbXZxRkEiLCJicmFuZCI6bnVsbCwiZXhwIjoxNjU4NDE1OTc0LCJhdmF0YXJVcmwiOiJodHRwczpcL1wvYXV0aC1hdmF0YXJzLXNreWVuZy5pbWdpeC5uZXRcLzEwMzM4NzM2XC8xZGQ5MzVhOC1kZjIxLTQ2YzYtYTAzYy0zNWU5MWUxZGVkZWY_YXV0bz1mb3JtYXQlMkNlbmhhbmNlJmZpdD1jcm9wJmg9MjAwJml4bGliPXBocC0yLjEuMSZxPTc1JnNhdD04JnNoYXJwPTEwJnZpYj04Jnc9MjAwIiwiYmlydGhkYXkiOiIxOTcxLTAzLTA1IiwiYVR5cGUiOiJVU0VSTkFNRV9QQVNTV09SRCIsImFUaW1lIjoxNjUwODIwMDkyLCJyb2xlcyI6WyJST0xFX1RFQUNIRVIiLCJST0xFX0NSTTJfVEVBQ0hFUl9BQ0NFU1MiLCJST0xFX1RUQ19VU0FHRSIsIlJPTEVfVklNQk9YX1RFQUNIRVJfVVNBR0UiLCJST0xFX1ZJTUJPWF9DUkVBVEVfU0NSRUVOSU5HX1RFU1QiXX0.au-oc8Q0KLsFpQi8Qn09jKVyDIDHis_U7oyT6nZ7boBVpqCGCV-lUPJepVYL9Xk8utG4YssGZ04ybliRxn9NXLcJrl50d6dYVLPwjc0qZZF7Tpv-QhRu1sh_rsW8om51enuZHNGsdYeKv83k7ZjN5_tpCS3MwUl1xDJxUuz3G6fPK4-2n7DI7CC3Yx3XDyA8Yu857BZdasr5JFhGy4nfTbZVF3uiOnjQYCFPoMhfE6b1nO79qwnskVWyjcJlnvI-FFPN8IryLx40XbjX5jIZM32H_WbVNZXkhDp9DWNHH0MmJ1bOXOdnBogpBtYpRPs2BPL_3TYwGMvJ1zxP-a96-1quzpR9ng7v225fmLCVm47yfRVKnjoVITfbMFAbtduXxJANc1ECR4dLhukeUFLmt6AtAdOBkjo19VcMJ71C0bkedT2L8Pae0jR4qX07hUx2XchMoGoSaCMVjifPhsHS1gBNIdvmMzjk5B89wxEeK2wVxq5jr8egV9d0CqI2euSUAT6WEcJXn4zDUDVPlaYYfHOhFQ-gtAZGK4sxrQ-NFtrpi1kMioYBog5bpS37XFL07YxpEUsLfDwyWG_7MWMmpaPfQ3iDAbvbLcdUMJgQunjWZl_FJH4mQs14bdNqna4SbgoEji_kvUFMcbY882OUaQPJOpMGx4Guxh9T-YJ1GTY",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEwMzM4NzM2LCJpZGVudGl0eSI6InRlc3QtbW9iaWxlMUBza3llbmcucnUiLCJpZGVudGl0eUxvZ2luIjpudWxsLCJpZGVudGl0eUVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsImlkZW50aXR5UGhvbmUiOiIrNzk2NDU0ODIxNTUiLCJuYW1lIjoiXHUwNDIxXHUwNDMyXHUwNDRmXHUwNDQyXHUwNDNlXHUwNDQxXHUwNDNiXHUwNDMwXHUwNDMyIiwic3VybmFtZSI6Ilx1MDQyMFx1MDQzMFx1MDQzN1x1MDQzMlx1MDQzMFx1MDQzYlx1MDQ0Zlx1MDQzNVx1MDQzMiIsImVtYWlsIjoidGVzdC1tb2JpbGUxQHNreWVuZy5ydSIsInVpTGFuZ3VhZ2UiOiJydSIsImxvY2FsZSI6InJ1Iiwic2VydmljZUxvY2FsZSI6bnVsbCwidWFzIjozMCwiand0VHlwZSI6MSwianRpIjoiVzROeFFkbVN3SHpsbWlhalNCSDZIcWJaanU3SmpRWU8iLCJicmFuZCI6bnVsbCwiZXhwIjoxNjU5NDQzMjYzLCJhdmF0YXJVcmwiOiJodHRwczpcL1wvYXV0aC1hdmF0YXJzLXNreWVuZy5pbWdpeC5uZXRcLzEwMzM4NzM2XC8xYzg0YjU1MS1lYzIzLTRlN2MtOTdiOS05Yzc0YjY2Y2UxZjg_YXV0bz1mb3JtYXQlMkNlbmhhbmNlJmZpdD1jcm9wJmg9MjAwJml4bGliPXBocC0yLjEuMSZxPTc1JnNhdD04JnNoYXJwPTEwJnZpYj04Jnc9MjAwIiwiYmlydGhkYXkiOiIxOTcxLTAzLTA1IiwiYVR5cGUiOiJVU0VSTkFNRV9QQVNTV09SRCIsImFUaW1lIjoxNjU5MTkxMjQ2LCJyb2xlcyI6WyJST0xFX1RFQUNIRVIiLCJST0xFX0NSTTJfVEVBQ0hFUl9BQ0NFU1MiLCJST0xFX1RUQ19VU0FHRSIsIlJPTEVfVklNQk9YX1RFQUNIRVJfVVNBR0UiLCJST0xFX1ZJTUJPWF9DUkVBVEVfU0NSRUVOSU5HX1RFU1QiXX0.Jp8ir5RtRUIjqd8vjHjOEkamG6c3OfzfFqKLSsBObBBF9ailbQXShc-SutcWtOLRJbS_1XD_jVOGnsa6OZCUpuUew0hE3Aa2pWA1AonqFqKz1MfAbkFX1Eg0xiWHXj3QRldROzSyc_hhtKbJNb1CW-QYw7-1jVt3Xh-0GtyJS9LvephiYTUmx5EUXEowQF3f8G1vRH0fLcO9nNIuN4IlIaAhSaQt7icrtkaZ6Kv0eIzKcKml8kOt1UEecRld6aD2g3WSdB14g0hNClvI7JOWLZBvyHfsUz9VYprberJmRYe2cVrwG1w8tgaDhtrucc4CFYyD1-Lk_f1JS8xwM-Iuvl53OQ6e6xi8bh3oeBF04p2Z8k7m4X3RxO2O25A3Asy0gYtNW7_u3-Fbk_GbrhXzqGT3C66vS225RbTYPjNlcNmSUGz1YBcyLmb8c2mos9LDQGh3k6oiNtvAWDhPnh8TwtnoxZduZf8M89cOb0WRKD2sdkrvtl2SOukNV9GCuNqvH6ELugwGc2vBNvdo9hozOxm83rwUapOjZFam9CDVS91rvgZ7xSQFqtLogqAnA4Xk7AUJnrDDIJ00YspRh4V1aqcN27QXHnOJ0xHILj98BdYzb0gPoqzCUZIKY5wQ6t6RCZVrtMtQTiMVxwNRKlL7SOMOEMTHvw0d39DRvGuotGM",
 				"type": "string"
 			}
 		]
