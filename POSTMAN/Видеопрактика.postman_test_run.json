@@ -1,0 +1,297 @@
+{
+	"id": "801442fb-d34e-4ce2-bb5a-4f1455f3bd63",
+	"name": "Видеопрактика",
+	"timestamp": "2022-08-01T15:48:13.401Z",
+	"collection_id": "19266110-0ae36705-413c-4f45-bb1e-d863571cc6a5",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 7,
+	"totalFail": 2,
+	"results": [
+		{
+			"id": "a45ffed6-29c5-46a3-979c-b299ad55c93a",
+			"name": "Получение списка видео",
+			"url": "https://api-vimbox.skyeng.ru/api/v1/compilations/showcase",
+			"time": 4369,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4369
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "cdc0b357-7a43-4792-a9c4-df427cf935ce",
+			"name": "Запрос по протоколу HTTP",
+			"url": "http://api-vimbox.skyeng.ru/api/v1/compilations/showcase",
+			"time": 4050,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 308": false
+			},
+			"testPassFailCounts": {
+				"Status code is 308": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				4050
+			],
+			"allTests": [
+				{
+					"Status code is 308": false
+				}
+			]
+		},
+		{
+			"id": "ee759c4c-cf5d-4add-810e-4a05830f2d8f",
+			"name": "Запрос без указания протокола",
+			"url": "http://api-vimbox.skyeng.ru/api/v1/compilations/showcase",
+			"time": 3861,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 302": false
+			},
+			"testPassFailCounts": {
+				"Status code is 302": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				3861
+			],
+			"allTests": [
+				{
+					"Status code is 302": false
+				}
+			]
+		},
+		{
+			"id": "491c23ce-0be5-403f-b5c2-205fc14605e7",
+			"name": "Запрос в неправильную версию API",
+			"url": "https://api-vimbox.skyeng.ru/api/v2/compilations/showcase",
+			"time": 66,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				66
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "a5b52dd2-d4fe-45f1-bfba-8265650c45e9",
+			"name": "Запрос в неправильный эндпоинт",
+			"url": "https://api-vimbox.skyeng.ru/api/v1/notifications",
+			"time": 90,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				90
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "52cb5ccb-d622-468e-80bc-67307dcb86a1",
+			"name": "Получение списка неавторизованным пользователем",
+			"url": "https://api-vimbox.skyeng.ru/api/v1/compilations/showcase",
+			"time": 63,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Status code is 401": true
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				63
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			]
+		},
+		{
+			"id": "981c37c6-bd56-45ab-a72e-754cb6baf0fc",
+			"name": "Получение списка методом POST",
+			"url": "https://api-vimbox.skyeng.ru/api/v1/compilations/showcase",
+			"time": 69,
+			"responseCode": {
+				"code": 405,
+				"name": "Method Not Allowed"
+			},
+			"tests": {
+				"Status code is 405": true
+			},
+			"testPassFailCounts": {
+				"Status code is 405": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				69
+			],
+			"allTests": [
+				{
+					"Status code is 405": true
+				}
+			]
+		},
+		{
+			"id": "7d0ec30a-a2f3-4a89-a6c7-22a0925977d2",
+			"name": "Получение списка методом PUT",
+			"url": "https://api-vimbox.skyeng.ru/api/v1/compilations/showcase",
+			"time": 72,
+			"responseCode": {
+				"code": 405,
+				"name": "Method Not Allowed"
+			},
+			"tests": {
+				"Status code is 405": true
+			},
+			"testPassFailCounts": {
+				"Status code is 405": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				72
+			],
+			"allTests": [
+				{
+					"Status code is 405": true
+				}
+			]
+		},
+		{
+			"id": "95c482f0-52ed-4032-bb13-e5cdf87d01be",
+			"name": "Получение списка методом DELETE",
+			"url": "https://api-vimbox.skyeng.ru/api/v1/compilations/showcase",
+			"time": 65,
+			"responseCode": {
+				"code": 405,
+				"name": "Method Not Allowed"
+			},
+			"tests": {
+				"Status code is 405": true
+			},
+			"testPassFailCounts": {
+				"Status code is 405": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				65
+			],
+			"allTests": [
+				{
+					"Status code is 405": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 12705,
+	"collection": {
+		"requests": [
+			{
+				"id": "a45ffed6-29c5-46a3-979c-b299ad55c93a",
+				"method": "GET"
+			},
+			{
+				"id": "cdc0b357-7a43-4792-a9c4-df427cf935ce",
+				"method": "GET"
+			},
+			{
+				"id": "ee759c4c-cf5d-4add-810e-4a05830f2d8f",
+				"method": "GET"
+			},
+			{
+				"id": "491c23ce-0be5-403f-b5c2-205fc14605e7",
+				"method": "GET"
+			},
+			{
+				"id": "a5b52dd2-d4fe-45f1-bfba-8265650c45e9",
+				"method": "GET"
+			},
+			{
+				"id": "52cb5ccb-d622-468e-80bc-67307dcb86a1",
+				"method": "GET"
+			},
+			{
+				"id": "981c37c6-bd56-45ab-a72e-754cb6baf0fc",
+				"method": "POST"
+			},
+			{
+				"id": "7d0ec30a-a2f3-4a89-a6c7-22a0925977d2",
+				"method": "PUT"
+			},
+			{
+				"id": "95c482f0-52ed-4032-bb13-e5cdf87d01be",
+				"method": "DELETE"
+			}
+		]
+	}
+}
